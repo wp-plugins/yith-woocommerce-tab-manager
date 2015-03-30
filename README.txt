@@ -17,7 +17,7 @@ Efficient pages for direct information
 Understanding is vital to reassure clients and with YITH WooCommerce Tab Manager you will be able to customize the product pages with all the information you want:
 PDF files to download, virtual maps, video tutorials, additional details, galleries... every kind of content! The best way to offer what users need and persuade them to purchase immediately.
 
-= Main features: =
+**Main features:**
 
 * Freedom to create infinite tabs containing an editor
 * Options to rename, move and delete the created tabs
