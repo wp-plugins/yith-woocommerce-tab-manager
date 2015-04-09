@@ -22,6 +22,7 @@ PDF files to download, virtual maps, video tutorials, additional details, galler
 * Freedom to create infinite tabs containing an editor
 * Options to rename, move and delete the created tabs
 
+Full documentation is available [here](http://yithemes.com/docs-plugins/yith-woocommerce-tab-manager/).
 
 == Screenshots ==
 
