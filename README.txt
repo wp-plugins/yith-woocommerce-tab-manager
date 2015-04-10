@@ -1,7 +1,7 @@
 === YITH WooCommerce Tab Manager ===
 
 Contributors: yithemes
-Tags: tab, products, woocommerce, shop, ecommece, e-commerce
+Tags: tab, woocommerce, product, custom tab, e-commerce, ecommerce, commerce, global tab, product tab, tab manager, tabs, shop, yith, yit, yithemes
 Requires at least: 3.5.1
 Tested up to: 4.1
 Stable tag: 1.0.2
@@ -22,11 +22,15 @@ PDF files to download, virtual maps, video tutorials, additional details, galler
 * Freedom to create infinite tabs containing an editor
 * Options to rename, move and delete the created tabs
 
-Full documentation is available [here](http://yithemes.com/docs-plugins/yith-woocommerce-tab-manager/).
+For a more detailed list of options and features of the plugin, please look at the [official documentation](http://yithemes.com/docs-plugins/yith-woocommerce-tab-manager/ "Yith WooCommerce Tab Manager official documentation").
+
 
 == Screenshots ==
 
 1. Admin: add a new tab
+2. Admin: tab list
+3. Admin: plugin setting
+4. Product Page: my first extra tab in frontend
 
 
 = Installation =
