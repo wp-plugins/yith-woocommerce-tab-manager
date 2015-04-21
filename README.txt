@@ -26,11 +26,11 @@ For a more detailed list of options and features of the plugin, please look at t
 
 
 == Screenshots ==
-
-1. Admin: add a new tab
-2. Admin: tab list
-3. Admin: plugin setting
-4. Product Page: my first extra tab in frontend
+1. Admin: add tab menu
+2. Admin: add a new tab 
+3. Admin: tab list
+4. Admin: plugin setting
+5. Product Page: my first extra tab in frontend
 
 
 = Installation =
