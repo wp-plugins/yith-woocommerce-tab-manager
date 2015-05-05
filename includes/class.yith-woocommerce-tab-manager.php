@@ -47,7 +47,7 @@ if ( !class_exists( 'YITH_WC_Tab_Manager' ) ) {
         /**
          * @var string Premium version landing link
          */
-        protected $_premium_landing = 'http://yithemes.com/themes/plugins/yith-woocommerce-tab-manager/';
+        protected $_premium_landing_url = 'http://yithemes.com/themes/plugins/yith-woocommerce-tab-manager/';
 
         /**
          * @var string Plugin official documentation
@@ -97,7 +97,7 @@ if ( !class_exists( 'YITH_WC_Tab_Manager' ) ) {
          * Initialize plugin and registers actions and filters to be used
          *
          * @since  1.0
-         * @author Salvatore Strano
+         * @author Yithemes
          */
     
 	public function __construct()
@@ -115,17 +115,14 @@ if ( !class_exists( 'YITH_WC_Tab_Manager' ) ) {
             //Enqueue admin style
             add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_style'));
 
-          //  add_filter( 'plugin_row_meta', array( $this, 'plugin_row_meta' ), 10, 4 );
-            //add_action( 'yith_tab_manager_premium', array( $this, 'premium_tab' ) );
+            add_filter( 'plugin_row_meta', array( $this, 'plugin_row_meta' ), 10, 4 );
+            add_action( 'yith_tab_manager_premium', array( $this, 'premium_tab' ) );
 
             //  Add action menu
             add_action( 'admin_menu', array( $this, 'add_menu_page' ), 5 );
 
             //Add action register post type
-            add_action('init', array($this, 'tabs_post_type'), 0);
-
-          //add_action('admin_menu', array($this, 'add_submenu_woocommerce_product'));
-
+            add_action('init', array($this, 'tabs_post_type'), 10);
 
             add_filter('manage_edit-' . $this->post_type_name . '_columns', array($this, 'edit_columns'));
             add_action('manage_' . $this->post_type_name . '_posts_custom_column', array($this, 'custom_columns'), 10, 2);
@@ -178,12 +175,8 @@ if ( !class_exists( 'YITH_WC_Tab_Manager' ) ) {
                 'settings'      => __( 'Settings', 'yith_wc_tab_manager' ),
             );
 
-            if ( defined( 'YWTM_PREMIUM' ) ) {
-                $admin_tabs['premium'] = __( 'Premium Settings', 'yith_wc_tab_manager' );
-                $admin_tabs['layout'] = __( 'Layouts', 'yith_wc_tab_manager' );
-            }/* else {
+            if( !defined( 'YWTM_PREMIUM' ) )
                 $admin_tabs['premium-landing'] = __( 'Premium Version', 'yith_wc_tab_manager' );
-            }*/
 
             $args = array(
                 'create_menu_page' => true,
@@ -234,16 +227,16 @@ if ( !class_exists( 'YITH_WC_Tab_Manager' ) ) {
 
             $links[] = '<a href="' . admin_url( "admin.php?page={$this->_panel_page}" ) . '">' . __( 'Settings', 'yith_wc_tab_manager' ) . '</a>';
 
-         /*   if ( defined( 'YWCTM_FREE_INIT' ) ) {
-                $links[] = '<a href="' . $this->_premium_landing . '" target="_blank">' . __( 'Premium Version', 'yith_wc_tab_manager' ) . '</a>';
-            }*/
+            if ( defined( 'YWTM_FREE_INIT' ) ) {
+                $links[] = '<a href="' . $this->get_premium_landing_uri() . '" target="_blank">' . __( 'Premium Version', 'yith_wc_tab_manager' ) . '</a>';
+            }
 
             return $links;
         }
 
         /**
          * Register admin free style
-         * @author Salvatore Strano
+         * @author Yithemes
          * @since 1.0.0
          * @fire admin_enqueue_scripts hook
          */
@@ -285,7 +278,7 @@ if ( !class_exists( 'YITH_WC_Tab_Manager' ) ) {
          *
          * Register a Global Tab post type
          *
-         * @author Salvatore Strano
+         * @author Yithemes
          * @since 1.0.0
          */
      public  function tabs_post_type() {
@@ -353,14 +346,14 @@ if ( !class_exists( 'YITH_WC_Tab_Manager' ) ) {
         /**
          * Customize the messages for Tabs
          * @param $messages
-         * @author Salvatore Strano
+         * @author Yithemes
          *
          * @return array
          * @fire post_updated_messages filter
          */
         public function custom_tab_messages ( $messages ) {
 
-            $singular_name  =   $this->get_tab_taxonomy_label('singular_name');
+           $singular_name  =   $this->get_tab_taxonomy_label('singular_name');
            $messages[$this->post_type_name] =   array (
 
                0    =>  '',
@@ -368,7 +361,7 @@ if ( !class_exists( 'YITH_WC_Tab_Manager' ) ) {
                2    =>  __('Custom field updated', 'yith_wc_tab_manager'),
                3    =>  __('Custom field deleted', 'yith_wc_tab_manager'),
                4    =>  __($singular_name.' updated', 'yith_wc_tab_manager'),
-               5    =>  isset( $_GET['revision'] ) ? sprintf( __( 'Tab restored to revision %s', 'yith_wc_tab_manager' ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
+               5    =>  isset( $_GET['revision'] ) ? sprintf( __( 'Tab restored to version %s', 'yith_wc_tab_manager' ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
                6    =>  __($singular_name.' published', 'yith_wc_tab_manager'),
                7    =>  __($singular_name.' saved', 'yith_wc_tab_manager'),
                8    =>  __($singular_name.' submitted', 'yith_wc_tab_manager'),
@@ -380,28 +373,10 @@ if ( !class_exists( 'YITH_WC_Tab_Manager' ) ) {
             return $messages;
         }
 
-
-     /**
-     * add_submenu_woocommerce_product
-     *
-     * Add item Tab manager to Products menu
-     *@autor Salvatore Strano
-     *@since 1.0.0
-      *//*
-    public function add_submenu_woocommerce_product() {
-    	add_submenu_page('edit.php?post_type=product',
-    			__('Tab Manager', 'yith_wc_tab_manager'),
-    			__('Tab Manager', 'yith_wc_tab_manager'),
-    			'manage_woocommerce',
-    			'edit.php?post_type=' . $this->post_type_name,
-    			false
-    	);
-    }*/
-
     /**
     * add_tab_metabox
      * Register metabox for global tab
-     * @author Salvatore Strano
+     * @author Yithemes
      * @since 1.0.0
     */
     public function  add_tab_metabox() {
@@ -412,13 +387,14 @@ if ( !class_exists( 'YITH_WC_Tab_Manager' ) ) {
     	}
     	$metabox    =   YIT_Metabox('yit-tab-manager-setting');
     	$metabox->init($args);
+
     }
 
     /**
     * get_tabs
     * build the global tab
     *
-    * @author Salvatore Strano
+    * @author Yithemes
     * @return mixed
     */
    public function get_tabs() {
@@ -452,7 +428,7 @@ if ( !class_exists( 'YITH_WC_Tab_Manager' ) ) {
   /**
    * add_global_tabs_woocommerce
    *
-   * @author Salvatore Strano
+   * @author Yithemes
    * @since 1.0.0
    * @param $tabs
    * @return mixed
@@ -492,7 +468,7 @@ if ( !class_exists( 'YITH_WC_Tab_Manager' ) ) {
    /**
     * get_coeff_priority
     * Set the coefficient for tabs priority
-    * @author Salvatore Strano
+    * @author Yithemes
     * @return int
     */
     protected function get_priority() {
@@ -511,7 +487,7 @@ if ( !class_exists( 'YITH_WC_Tab_Manager' ) ) {
     			'cb' => '<input type="checkbox" />',
     			'title' => __('Title', 'yith_wc_tab_manager'),
     			'is_show' => __('Is Visible', 'yith_wc_tab_manager'),
-    			'tab_position' => __('Tab Priority', 'yith_wc_tab_manager'),
+    			'tab_position' => __('Tab Position', 'yith_wc_tab_manager'),
     			'date' => __('Date', 'yith_wc_tab_manager'),
     	             )
                  ) ;
@@ -543,5 +519,16 @@ if ( !class_exists( 'YITH_WC_Tab_Manager' ) ) {
 
         }
     }
- }
+
+        /**
+         * Get the premium landing uri
+         *
+         * @since   1.0.0
+         * @author  Andrea Grillo <andrea.grillo@yithemes.com>
+         * @return  string The premium landing link
+         */
+        public function get_premium_landing_uri(){
+            return defined( 'YITH_REFER_ID' ) ? $this->_premium_landing_url . '?refer_id=' . YITH_REFER_ID : $this->_premium_landing_url;
+        }
+    }
 }

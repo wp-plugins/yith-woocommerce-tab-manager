@@ -15,7 +15,7 @@ return array(
 
     'settings' => array(
 
-        /*'section_general_settings_videobox'         => array(
+        'section_general_settings_videobox'         => array(
             'name' => __( 'Upgrade to the PREMIUM VERSION', 'yith_wc_tab_manager' ),
             'type' => 'videobox',
             'default' => array(
@@ -25,7 +25,7 @@ return array(
 of YITH WooCommerce Tab Manager to benefit from all features!', 'yith_wc_tab_manager'),
 
                 'video' => array(
-                    'video_id'           => '118792418',
+                    'video_id'           => '126788273',
                     'video_image_url'    =>  YWTM_ASSETS_URL.'/images/yith-woocommerce-tab-manager.jpg',
                     'video_description'  => __( 'YITH WooCommerce Tab Manager', 'yith_wc_tab_manager' ),
                 ),
@@ -37,7 +37,7 @@ of YITH WooCommerce Tab Manager to benefit from all features!', 'yith_wc_tab_man
                 )
             ),
             'id'   => 'yith_wctm_general_videobox'
-        ),*/
+        ),
 
         'section_general_settings'     => array(
             'name' => __( 'General settings', 'yith_wc_tab_manager' ),
