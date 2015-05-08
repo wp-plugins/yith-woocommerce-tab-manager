@@ -295,7 +295,7 @@ if ( !class_exists( 'YITH_WC_Tab_Manager' ) ) {
                  'show_in_menu'         =>  true,
                  'show_in_nav_menus'    =>  false,
                  'show_in_admin_bar'    =>  false,
-                 'menu_position'        =>  58,
+                 'menu_position'        =>  57,
                  'menu_icon'            =>  'dashicons-feedback',
                  'can_export'           =>  true,
                  'has_archive'          =>  false,
