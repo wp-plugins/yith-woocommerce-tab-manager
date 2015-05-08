@@ -4,7 +4,7 @@ Contributors: yithemes
 Tags: tab, woocommerce, product, custom tab, e-commerce, ecommerce, commerce, global tab, product tab, tab manager, tabs, shop, yith, yit, yithemes
 Requires at least: 3.5.1
 Tested up to: 4.2.1
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -60,6 +60,10 @@ Here we provide support, not on wordpress.org were, usually we do not read topic
 
 == Changelog ==
 
+= 1.0.2 =
+
+*Fixed: menu position conflict
+
 = 1.0.1 =
 
 * Fixed: minor bug
@@ -70,6 +74,6 @@ Here we provide support, not on wordpress.org were, usually we do not read topic
 
 == Upgrade Notice ==
 
-= 1.0.1 =
+= 1.0.2 =
 
-* Fixed: minor bug
+*Fixed: menu position conflict
