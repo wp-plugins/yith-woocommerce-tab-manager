@@ -404,6 +404,7 @@ if ( !class_exists( 'YITH_WC_Tab_Manager' ) ) {
            'post_type'      =>  'ywtm_tab'  ,
            'post_status'    =>  'publish',
            'posts_per_page' =>  -1,
+           'suppress_filters' =>  0
 
        );
        $q_tabs 	= 	get_posts( $args );
@@ -411,13 +412,14 @@ if ( !class_exists( 'YITH_WC_Tab_Manager' ) ) {
 
        foreach ($q_tabs as $tab){
 
-           if( true==get_post_meta( $tab->ID, '_ywtm_show_tab', true ) ) {
+
+           if( true==get_post_meta(  $tab->ID, '_ywtm_show_tab', true ) ) {
 
                $attr_tab = array();
                $attr_tab['title']                  =   $tab->post_title;
                $attr_tab['priority']               =   get_post_meta($tab->ID, '_ywtm_order_tab', true);
                $attr_tab['id']                     =   $tab->ID;
-               $tabs[$tab->post_title.'_'.$tab->ID] =   $attr_tab;
+               $tabs[$tab->post_title.'_'.$tab->ID] =  $attr_tab;
 
              }
            }
